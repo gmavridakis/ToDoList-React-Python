@@ -1,4 +1,0 @@
-CMD commands
---------------
-sqllocaldb create "ToDoListDB" -s
-sqllocaldb info

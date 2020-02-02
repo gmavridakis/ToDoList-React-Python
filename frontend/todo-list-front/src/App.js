@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import TasksUI from './component/TasksUI'
+import TasksUI from './components/TasksUI'
 
 function App() {
   return (
