@@ -1,2 +1,2 @@
 # ToDoList-React-Python
-API in python to store data in MicrosoftSQL (front in React!)
+Save user tasks (ReactJS) in DB (MicrosoftSQL) - Python API
