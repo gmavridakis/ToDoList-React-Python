@@ -1,64 +1,66 @@
 import React, { Component } from 'react'
+import TasksDatable from './TasksDatable';
 
 class TasksUI extends Component{
 
-    visibleEditor = false;
-    
     constructor(){
         super()
         this.state = {
-            editor: ''
+            visibleTaskTable: false,
+            textShowTable: 'Show All Tasks'
         }
+
+        this.showTasksHandler = this.showTasksHandler.bind(this);
+        this.deleteTasksHandler = this.deleteTasksHandler.bind(this);
+        this.addTaskHandler = this.addTaskHandler.bind(this);
     }
 
-    showEditor(){
-        this.setState(
-            {
-                editor: '(created by Greg Foutska)'
-            },
-            () => {
-                console.log('Callback function - show editor')
-            }
-        )
-    }
-
-    hideEditor(){
-        this.setState(
-            {
-                editor: ''
-            },
-            () => {
-                console.log('Callback function - hide editor')
-            }
-        )
-    }
-
-    showTasks(){
+    showTasksHandler(){
         console.log('clicked showTasks');
+        this.state.textShowTable === 'Hide All Tasks'
+                    ? this.setState(
+                        {  textShowTable : "Show All Tasks" ,  visibleTaskTable: false},
+                        () => { console.log('Callback showTasksHandler 1') }
+                        )
+                    : this.setState(
+                        {  textShowTable : "Hide All Tasks" ,  visibleTaskTable: true },
+                        () => { console.log('Callback showTasksHandler 2') }
+                        )
     }
-    deleteTasks(){
+    deleteTasksHandler(){
         console.log('clicked deleteTasks');
+        console.log(this)
     }
-    addTask(){
+    addTaskHandler(){
         console.log('clicked addTask');
+        console.log(this)
     }
-
+    
     render(){
         return (
-            <div>
-                <div className="header">
-                    <h1 className="main-container">React Application - To Do List {this.state.editor}</h1>
-                    <button onClick={ () => this.showEditor() } >Show Editor</button>
-                    <button onClick={ () => this.hideEditor() } >Hide Editor</button>
+            <div className="row page-container">
+                <div className="col-xl-2 col-md-1"></div>
+                <div className="col-xl-8 col-md-10">
+                    <div className="header">
+                        <h3 className="main-container w-100 d-inline-block text-center p-5 bg-info">
+                            React Application To Do List <span class="font-italic">by Grigoris Mavridakis</span>
+                        </h3>
+                    </div>
+                    <div className="content">
+                        <div className="actions row">
+                            <div className="col-4"><button className="btn m-1 w-100" onClick={ this.showTasksHandler } >{this.state.textShowTable}</button></div>
+                            <div className="col-4"><button className="btn m-1 w-100" onClick={ this.deleteTasksHandler } >Delete All Tasks</button></div>
+                            <div className="col-4"><button className="btn m-1 w-100" onClick={ this.addTaskHandler } >Add Task</button></div>
+                        </div>
+                        <div className="datatable">
+                            {  this.state.visibleTaskTable
+                                ? <TasksDatable />
+                                : null
+                            }    
+                        </div>
+                    </div>
                 </div>
-                <div className="content">
-                    Welcome on To Do List Application
-                </div>
-                <div className="actions">
-                    <button onClick={ () => this.showTasks() } >Show All Tasks</button>
-                    <button onClick={ () => this.deleteTasks() } >Delete All Tasks</button>
-                    <button onClick={ () => this.addTask() } >Add Task</button>
-                </div>
+                <div className="col-xl-2 col-md-1"></div>
             </div>
         )
     }
