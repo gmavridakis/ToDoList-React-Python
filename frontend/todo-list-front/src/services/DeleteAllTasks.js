@@ -12,7 +12,7 @@ class DeleteAllTasks extends Component {
       })
       .catch( e => {
         console.error(e)
-        this.setState({ result: 'Error retreiving data' })
+        this.setState({ result: 'Error updating data' })
       })
       this.state = {
         result: ''
