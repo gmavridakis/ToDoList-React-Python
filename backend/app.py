@@ -3,6 +3,11 @@ from sqlite3 import Error
 import json
 from flask import Flask,request
 app = Flask('__name__')
+from flask_cors import CORS
+CORS(app)
+# http://127.0.0.1:5001/viewtasks
+# http://127.0.0.1:5001/addtask?task=update github project&user=gmavridakis
+# http://127.0.0.1:5001/deletetasks
 
 # create a database connection
 def createConnection():
@@ -71,8 +76,7 @@ def deletetasks():
     # baseUrl/deletetasks
     conn = createConnection()
     deleteTasks(conn)
-    res = getTasks(conn)
-    return res
+    return '200'
 
 @app.route('/addtask', methods=['GET'])
 def addtask():
@@ -82,10 +86,9 @@ def addtask():
     conn = createConnection()
     if task and user :
         addTask(conn,task,user)
-        res = getTasks(conn)
-        return res
+        return '200'
     else :
-        return "Something went wrong"
+        return '500'
 
 # define APIs - END
 
@@ -99,3 +102,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
